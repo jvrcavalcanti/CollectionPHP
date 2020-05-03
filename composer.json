@@ -1,5 +1,9 @@
 {
-    "require": {},
+    "name": "accolon/collection-php",
+    "description": "Class collection PHP pure",
+    "require": {
+        "php": "^7.4"
+    },
     "autoload": {
         "psr-4": {
             "CollectionPHP\\": "src/"
