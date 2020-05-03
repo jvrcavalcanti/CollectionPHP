@@ -2,11 +2,17 @@
     "name": "accolon/collection-php",
     "description": "Class collection PHP pure",
     "require": {
-        "php": "^7.4"
+        "php": "^7.4",
+        "phpunit/phpunit": "^9.1"
     },
     "autoload": {
         "psr-4": {
             "CollectionPHP\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CollectionPHP\\Test\\": "tests/"
         }
     },
     "license": "MIT"

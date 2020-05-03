@@ -11,9 +11,9 @@ abstract class Collection implements Countable, Iterator
 
     protected array $items = [];
 
-    abstract public function checkInstance($obj): bool;
+    abstract public function checkInstance(ItemCollection $obj): bool;
 
-    public function add($obj, int $key = null): void
+    public function add(ItemCollection $obj, ?int $key = null): void
     {
         if (!$this->checkInstance($obj)) {
             throw new \TypeError("Type collection incorrect");
@@ -27,7 +27,7 @@ abstract class Collection implements Countable, Iterator
         $this->items[] = $obj;
     }
 
-    public function del(int $key): void
+    public function deleteByKey(int $key): void
     {
         if (!isset($this->items[$key])) {
             throw new KeyInvalidException("Invalid key $key.");
@@ -36,13 +36,32 @@ abstract class Collection implements Countable, Iterator
         unset($this->items[$key]);
     }
 
-    public function get(int $key)
+    public function deleteByValue(ItemCollection $other): void
+    {
+        foreach($this->items as $key => $item) {
+            if ($other->equal($item)) {
+                $this->deleteByKey($key);
+                break;
+            }
+        }
+    }
+
+    public function getByKey(int $key)
     {
         if (!isset($this->items[$key])) {
             throw new KeyInvalidException("Invalid key $key.");
         }
 
         return $this->items[$key];
+    }
+
+    public function getByValue(ItemCollection $other): ?ItemCollection
+    {
+        foreach($this->items as $key => $item) {
+            if ($other->equal($item)) {
+                return $item;
+            }
+        }
     }
 
     public function getKeys(): array
@@ -57,7 +76,7 @@ abstract class Collection implements Countable, Iterator
 
     public function count(): int
     {
-        return cout($this->items);
+        return count($this->items);
     }
 
     public function rewind(): void
