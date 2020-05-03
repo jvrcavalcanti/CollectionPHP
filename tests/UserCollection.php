@@ -6,8 +6,8 @@ use CollectionPHP\Collection;
 
 class UserCollection extends Collection
 {
-    public function checkInstance(\CollectionPHP\ItemCollection $obj): bool
+    public function checkInstance($item): bool
     {
-        return $obj instanceof User ? true : false;
+        return $item instanceof User ? true : false;
     }
 }
